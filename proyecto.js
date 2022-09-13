@@ -13,25 +13,17 @@ class cliente {
 }
 
 let boton = document.getElementById("info");
-boton?.addEventListener("click", cargarInfo);
+boton?.addEventListener("click", cargarInfo,);
 
 function cargarInfo() {
     let nombre = document.getElementById("Nombre").value;
     let apellido = document.getElementById("Apellido").value;
     let email = document.getElementById("Email").value;
-    let info1 = new cliente(nombre, apellido, email);
-    console.log(info1);
-    infoCliente(info1);
+    let data = new cliente(nombre, apellido, email);
+    console.log(data)
 }
 
-function infoCliente(cliente) {
-    let datos = document.getElementById("Informacion");
-    datos.innerHTML = "";
-    let nuevoContenedor = document.createElement("div");
-    nuevoContenedor.innerHTML = `Gracias ${cliente.nombre}, al correo ${cliente.email} le llegara la confirmacion de nueva cuenta, Gracias`; 
-    tipoDeProductos()
-}
-
+let carrito = []
 
 const contenedor = document.getElementById("ropaDeportiva");
 let tipoDeProductos = [
@@ -42,15 +34,26 @@ let tipoDeProductos = [
 
 tipoDeProductos.forEach((producto) =>{
     const div = document.createElement(`div`);
-    div.classList.add("producto");
+    div.classList.add(`producto`);
     div.innerHTML = `
     <img src=${producto.img}>
     <h4>${producto.nombre}</h4>
     <p>${producto.precio}</p>
-    <button id ="agregar${producto.id}" class="boton-agregar>AGREGAR</button>"`
+    <button id ="agregar${producto.id}" class="boton-agregar">AGREGAR</button>`
 
     contenedor.appendChild(div)
+
+    const boton = document.getElementById(`agregar${producto.id}`);
+    boton.addEventListener(`click`, () => {
+        agegarCarrito(producto.id)
+        console.log(carrito)
+    })
 })
+
+function agegarCarrito(prodId) {
+    const item = tipoDeProductos.find ((prod) => prod.id === prodId)
+    carrito.push(item)
+}
 
 
 
