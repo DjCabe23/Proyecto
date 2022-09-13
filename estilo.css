@@ -56,3 +56,40 @@ ul.botonera li a:hover{
     width: 250px;
     height: 250px;
 }
+
+.columna1{
+    margin: 300;
+    padding: 0;
+    list-style-type: none;
+}
+
+.columna1 label{
+    width: 176px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    display: inline-block;
+    color: #6A0888 ;
+    text-decoration: none;
+}
+
+.columna2{
+    margin: 300;
+    padding: 0;
+    list-style-type: none;
+}
+
+.columna2 input{
+    width: 176px;
+    height: 20px;
+    text-align: center;
+    line-height: 50px;
+    display: inline-block;
+    color: #6A0888 ;
+    text-decoration: none;
+}
+
+
+.botoninfo{
+    background-color: #6A0888 ;
+}
