@@ -1,7 +1,7 @@
 let fecha = new Date();
 let año = fecha.getFullYear();
 let mes = fecha.getMonth() + 1;
-let dia = fecha.getDay();
+let dia = fecha.getDate();
 document.getElementById("reloj").innerHTML = dia + "/" + mes + "/" + año;
 
 class cliente {
