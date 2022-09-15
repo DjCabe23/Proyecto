@@ -24,7 +24,6 @@ function cargarInfo() {
     console.log(data)
 }
 
-const contenedorCarrito = document.getElementById(`carrito-contenedor`);
 const botonvaciar = document.getElementById("vaciarcarro");
 botonvaciar.addEventListener("click", () =>{
     carrito.length = 0;
@@ -32,6 +31,7 @@ botonvaciar.addEventListener("click", () =>{
     });
 
 const preciototal = document.getElementById("precioTotal")
+
 let carrito = []
 
 const contenedor = document.getElementById("ropaDeportiva");
@@ -71,17 +71,17 @@ const eliminarDelCarrito = (prodId) => {
     carrito.splice(indice, 1)
     actualizarCarrito()
 }
+const contenedorCarrito = document.getElementById(`carrito-contenedor`);
 
 const actualizarCarrito = () => {
     contenedorCarrito.innerHTML=""
-
-
     carrito.forEach((prod)=>{
     const div = document.createElement(`div`);
     div.className = (`productoEnCarrito`);
     div.innerHTML = `
-    <p>${prod.nombre}</p>
-    <p>Precio: ${prod.precio}</p>`
+    <ul class="lista"><li>${prod.nombre}
+    Precio: ${prod.precio}</li>
+    </ul>`
     
     contenedorCarrito.appendChild(div)
     });
