@@ -4,6 +4,8 @@ let mes = fecha.getMonth() + 1;
 let dia = fecha.getDate();
 document.getElementById("reloj").innerHTML = dia + "/" + mes + "/" + año;
 
+//Informacion cliente
+
 class cliente {
     constructor(nombre, apellido, email){
         this.nombre = nombre;
@@ -12,17 +14,18 @@ class cliente {
     }
 }
 
-let boton = document.getElementById("info");
-boton?.addEventListener("click", cargarInfo,);
+let form = document.getElementById("form");
+form.addEventListener("submit", cargarInfo,);
 
-let data;
 function cargarInfo() {
     let nombre = document.getElementById("Nombre").value;
     let apellido = document.getElementById("Apellido").value;
     let email = document.getElementById("Email").value;
     data = new cliente(nombre, apellido, email);
-    console.log(data)
+    alert(`Gracias ${nombre}, a tu correo te llegara una verificacion`)
 }
+
+//Carrito
 
 const botonvaciar = document.getElementById("vaciarcarro");
 botonvaciar.addEventListener("click", () =>{
@@ -30,16 +33,17 @@ botonvaciar.addEventListener("click", () =>{
     actualizarCarrito()
     });
 
-const preciototal = document.getElementById("precioTotal")
-
 let carrito = []
 
-const contenedor = document.getElementById("ropaDeportiva");
+//Productos
 let tipoDeProductos = [
     {id: 1, nombre: "Zapatilla", precio :2500, img : `./zapatilla.jpg`},
     {id: 2, nombre: "Remera", precio :3000, img : `./remera.jpg`},
     {id: 3, nombre: "Pantalon", precio :4500, img : `./pantalom.jpg`},
     ]
+
+//Seleccion de ropa
+const contenedor = document.getElementById("ropaDeportiva");
 
 tipoDeProductos.forEach((producto) =>{
     const div = document.createElement(`div`);
@@ -59,11 +63,15 @@ tipoDeProductos.forEach((producto) =>{
     })
 })
 
+//Agregar 
+
 function agegarCarrito(prodId) {
     const item = tipoDeProductos.find ((prod) => prod.id === prodId)
     carrito.push(item)
     actualizarCarrito()
 }
+
+//Eliminar
 
 const eliminarDelCarrito = (prodId) => {
     const item = carrito.find((prod)=> prod.id === prodId)
@@ -71,8 +79,10 @@ const eliminarDelCarrito = (prodId) => {
     carrito.splice(indice, 1)
     actualizarCarrito()
 }
-const contenedorCarrito = document.getElementById(`carrito-contenedor`);
 
+//actualizacion del carro
+const preciototal = document.getElementById("precioTotal")
+const contenedorCarrito = document.getElementById(`carrito-contenedor`);
 const actualizarCarrito = () => {
     contenedorCarrito.innerHTML=""
     carrito.forEach((prod)=>{
@@ -85,5 +95,16 @@ const actualizarCarrito = () => {
     
     contenedorCarrito.appendChild(div)
     });
-    preciototal.innerText = carrito.reduce((acc, prod)=> acc + prod.precio, 0)
+    preciototal.innerText = carrito.reduce((acc, prod)=> acc + prod.precio, 0);
+
+    localStorage.setItem("carrito", JSON.stringify(carrito))
 }
+
+// JSON
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    if (localStorage.getItem("carrito")){
+        carrito = JSON.parse(localStorage.getItem("carrito"))
+        agegarCarrito()        
+    }
+})

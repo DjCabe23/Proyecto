@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,21 +10,14 @@
 <body>
   <h1 class="bienvenida">Hola! bienvenido a Solidic Sports</h1>
   <div id="reloj"></div>
-  <section id="Informacion">
-    <div class="form">
-      <div class="columna1">
-        <label for="Nombre">Nombre</label>
-        <label for="Apellido">Apellido</label>
-        <label for="Email">Email</label>
-      </div>
-      <div class="columna2">
-        <input id="Nombre">
-        <input id="Apellido">
-        <input id="Email">
-      </div>
-    </div>
-  </section>
-  <button type="button" id="botoninfo" id="info">Primary</button>
+  <form id="form">
+    <section id="Informacion">
+      <input type="text", name="Nombre", id="Nombre", placeholder="Nombre">
+      <input type="text", name="Apellido", id="Apellido", placeholder="Apellido">
+      <input type="text", name="Email", id="Email", placeholder="Email">
+    </section>
+    <button type="submit">Primary</button>
+  </form>  
   <ul class="botonera">
     <li><a href="#">Inicio</a></li>
   <div class="inicio-carro">
@@ -39,8 +32,6 @@
   </div>
 
   <main id="ropaDeportiva"></main>
-  <p id="Nombre"></p>
-  
   <script src="proyecto.js"></script>
 </body>
 </html>
