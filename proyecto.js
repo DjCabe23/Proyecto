@@ -22,6 +22,27 @@ class cliente {
     }
 }
 
+function submitForm(form) {
+    Swal.fire({
+        title: 'Estas seguro que lo queres enviar?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: `Confirmar`,
+        denyButtonText: `Cancelar`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Informacion enviada', '', 'success')
+          form.submit();
+            window.location.reload();
+        } else if (result.isDenied) {
+          Swal.fire('Informacion cancelada', '', 'error')
+        }
+        
+      })
+      return false
+}
+
+
 let form = document.getElementById("form");
 form.addEventListener("submit", cargarInfo,);
 
@@ -30,13 +51,8 @@ function cargarInfo() {
     let apellido = document.getElementById("Apellido").value;
     let email = document.getElementById("Email").value;
     data = new cliente(nombre, apellido, email);
-    const boton1 = document.getElementById(`#show-example-btn`);
-    boton1.addEventListener(`click`, () => {
-        Swal.mixin({
-        toast: true,
-        }).bindClickHandler('data-swal-toast-template')
     }
-)}
+
 
 //Carrito
 
@@ -44,6 +60,7 @@ const botonvaciar = document.getElementById("vaciarcarro");
 botonvaciar.addEventListener("click", () =>{
     carrito.length = 0;
     actualizarCarrito()
+    actualizarLocal()
     });
 
 let carrito = []
@@ -87,6 +104,7 @@ function agegarCarrito(prodId) {
     const item = tipoDeProductos.find ((prod) => prod.id === prodId)
     carrito.push(item)
     actualizarCarrito()
+    actualizarLocal()
 }
 
 //Eliminar
@@ -96,11 +114,14 @@ const eliminarDelCarrito = (prodId) => {
     const indice = carrito.indexOf(item)
     carrito.splice(indice, 1)
     actualizarCarrito()
+    actualizarLocal()
 }
 
 //actualizacion del carro
 const preciototal = document.getElementById("precioTotal")
+
 const contenedorCarrito = document.getElementById(`carrito-contenedor`);
+
 const actualizarCarrito = () => {
     contenedorCarrito.innerHTML=""
     carrito.forEach((prod)=>{
@@ -114,7 +135,9 @@ const actualizarCarrito = () => {
     contenedorCarrito.appendChild(div)
     });
     preciototal.innerText = carrito.reduce((acc, prod)=> acc + prod.precio, 0);
+}
 
+const actualizarLocal = () =>{
     localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
