@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <title>Proyecto</title>
 </head>
 <body>
@@ -16,7 +17,8 @@
       <input type="text", name="Apellido", id="Apellido", placeholder="Apellido">
       <input type="text", name="Email", id="Email", placeholder="Email">
     </section>
-    <button type="submit">Primary</button>
+    <button id="show-example-btn" data-swal-template="#my-template">
+    </button>
   </form>  
   <ul class="botonera">
     <li><a href="#">Inicio</a></li>
@@ -30,8 +32,12 @@
         <button id="vaciarcarro" class="botonAgregar">Vacias Carrito</button>
     </div>    
   </div>
-
+  <!--Toastify-->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <!--Sweetalert-->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <main id="ropaDeportiva"></main>
+  <!--Proyecto-->
   <script src="proyecto.js"></script>
 </body>
 </html>

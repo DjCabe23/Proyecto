@@ -4,6 +4,14 @@ let mes = fecha.getMonth() + 1;
 let dia = fecha.getDate();
 document.getElementById("reloj").innerHTML = dia + "/" + mes + "/" + año;
 
+// JSON
+document.addEventListener("DOMContentLoaded", ()=>{
+    if (localStorage.getItem("carrito")){
+        carrito = JSON.parse(localStorage.getItem("carrito"))    
+    }
+    actualizarCarrito()    
+})
+
 //Informacion cliente
 
 class cliente {
@@ -22,8 +30,13 @@ function cargarInfo() {
     let apellido = document.getElementById("Apellido").value;
     let email = document.getElementById("Email").value;
     data = new cliente(nombre, apellido, email);
-    alert(`Gracias ${nombre}, a tu correo te llegara una verificacion`)
-}
+    const boton1 = document.getElementById(`#show-example-btn`);
+    boton1.addEventListener(`click`, () => {
+        Swal.mixin({
+        toast: true,
+        }).bindClickHandler('data-swal-toast-template')
+    }
+)}
 
 //Carrito
 
@@ -53,13 +66,18 @@ tipoDeProductos.forEach((producto) =>{
     <h4>${producto.nombre}</h4>
     <p>$${producto.precio}</p>
     <button id ="agregar${producto.id}" class="boton-agregar">AGREGAR</button>`
-
     contenedor.appendChild(div)
 
     const boton = document.getElementById(`agregar${producto.id}`);
     boton.addEventListener(`click`, () => {
         agegarCarrito(producto.id)
-        console.log(carrito)
+        Toastify({
+            text: "Se agrego el producto seleccionado",
+            className: "info",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            }
+          }).showToast();
     })
 })
 
@@ -100,11 +118,3 @@ const actualizarCarrito = () => {
     localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
-// JSON
-
-document.addEventListener("DOMContentLoaded", ()=>{
-    if (localStorage.getItem("carrito")){
-        carrito = JSON.parse(localStorage.getItem("carrito"))
-        agegarCarrito()        
-    }
-})
