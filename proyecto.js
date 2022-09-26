@@ -24,22 +24,19 @@ class cliente {
 
 function submitForm(form) {
     Swal.fire({
-        title: 'Estas seguro que lo queres enviar?',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: `Confirmar`,
-        denyButtonText: `Cancelar`,
-    }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire('Informacion enviada', '', 'success')
-          form.submit();
+        title: "Perfecto",
+        text: "Los datos seran enviados, Gracias",
+        icon: "success",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((isOkay) => {
+        if (isOkay) {
+            form.submit();
             window.location.reload();
-        } else if (result.isDenied) {
-          Swal.fire('Informacion cancelada', '', 'error')
         }
-        
-      })
-      return false
+    });
+    return false;
 }
 
 
@@ -62,7 +59,26 @@ botonvaciar.addEventListener("click", () =>{
     actualizarCarrito()
     actualizarLocal()
     });
-
+const finCompra = document.getElementById("finCompra")
+finCompra.addEventListener("click", () => {
+    carrito.length=0
+    actualizarCarrito()
+    actualizarLocal()
+    Swal.fire({
+        title: "Perfecto",
+        text: "la compra ha sido perfecta, te enviaremos un correo con la informacion",
+        icon: "success",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((isOkay) => {
+        if (isOkay) {
+            form.submit();
+            window.location.reload();
+        }
+    });
+    return false;
+})
 let carrito = []
 
 //Productos
