@@ -39,15 +39,38 @@ function submitForm(form) {
     return false;
 }
 
+document.addEventListener(`DOMContentLoaded`, () => {
+    document.getElementById(`form`).addEventListener(`submit`,
+    cargarInfo)
+})
 
-let form = document.getElementById("form");
-form.addEventListener("submit", cargarInfo,);
+let data;
 
-function cargarInfo() {
-    let nombre = document.getElementById("Nombre").value;
-    let apellido = document.getElementById("Apellido").value;
-    let email = document.getElementById("Email").value;
-    data = new cliente(nombre, apellido, email);
+function cargarInfo(event) {
+    let formulario = event.target;
+    console.log(formulario);
+
+    data = new FormData(formulario);
+
+    for(let keyValue of data.entries()){
+        console.log(`${keyValue[0]}, ${keyValue[1]}`)
+    }
+    
+    let nombre = document.getElementById(`Nombre`).value;
+    if (nombre.length == 0) {
+        alert("ingrese datos");
+        return;
+    }
+    let apellido = document.getElementById(`Apellido`).value;
+    if (apellido.length == 0) {
+        alert("ingrese datos");
+        return;
+    }
+    let email = document.getElementById(`Email`).value;
+    if (email.length === "@") {
+        alert("ingrese datos");
+        return;
+    }
     }
 
 
