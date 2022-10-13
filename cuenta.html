@@ -8,13 +8,12 @@
 </head>
 <body>
     <main>
-        <form id="form" method="POST" onsubmit="return submitForm(this);">
+        <form id="form" onsubmit="return submitForm(this);" action="index.html">
             <section id="Informacion">
-                <input type="text", name="Nombre", id="Nombre", placeholder="Nombre">
-                <input type="text", name="Apellido", id="Apellido", placeholder="Apellido">
-                <input type="text", name="Email", id="Email", placeholder="Email">
-                <a href="index.html" id="Registro">REGISTRATE</a>
-                
+                <input type="text", name="Nombre", id="Nombre", placeholder="Nombre" required>
+                <input type="text", name="Apellido", id="Apellido", placeholder="Apellido" required>
+                <input type="text", name="Email", id="Email", placeholder="Email" required>
+                <input type="submit" id="Registro" value="REGISTRATE">
             </section>
         </form>  
     </main>

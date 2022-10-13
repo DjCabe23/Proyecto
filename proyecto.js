@@ -119,7 +119,7 @@ const actualizarCarrito = () => {
     div.innerHTML = `
     <ul class="lista"><li>${prod.nombre}
     Precio: ${prod.precio}</li>
-    </ul><button id ="EliminarProducto">X</button>`
+    </ul><button onclick="eliminarDelCarrito(${prod.id})" id ="EliminarProducto">X</button>`
     
     contenedorCarrito.appendChild(div)
     });
