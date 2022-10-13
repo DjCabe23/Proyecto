@@ -22,58 +22,6 @@ class cliente {
     }
 }
 
-function submitForm(form) {
-    Swal.fire({
-        title: "Perfecto",
-        text: "Los datos seran enviados, Gracias",
-        icon: "success",
-        buttons: true,
-        dangerMode: true,
-    })
-    .then((isOkay) => {
-        if (isOkay) {
-            form.submit();
-            window.location.reload();
-        }
-    });
-    return false;
-}
-
-document.addEventListener(`DOMContentLoaded`, () => {
-    document.getElementById(`form`).addEventListener(`submit`,
-    cargarInfo)
-})
-
-let data;
-
-function cargarInfo(event) {
-    let formulario = event.target;
-    console.log(formulario);
-
-    data = new FormData(formulario);
-
-    for(let keyValue of data.entries()){
-        console.log(`${keyValue[0]}, ${keyValue[1]}`)
-    }
-    
-    let nombre = document.getElementById(`Nombre`).value;
-    if (nombre.length == 0) {
-        alert("ingrese datos");
-        return;
-    }
-    let apellido = document.getElementById(`Apellido`).value;
-    if (apellido.length == 0) {
-        alert("ingrese datos");
-        return;
-    }
-    let email = document.getElementById(`Email`).value;
-    if (email.length === "@") {
-        alert("ingrese datos");
-        return;
-    }
-    }
-
-
 //Carrito
 
 const botonvaciar = document.getElementById("vaciarcarro");
@@ -82,6 +30,7 @@ botonvaciar.addEventListener("click", () =>{
     actualizarCarrito()
     actualizarLocal()
     });
+
 const finCompra = document.getElementById("finCompra")
 finCompra.addEventListener("click", () => {
     carrito.length=0
@@ -102,6 +51,7 @@ finCompra.addEventListener("click", () => {
     });
     return false;
 })
+
 let carrito = []
 
 //Productos
@@ -169,14 +119,20 @@ const actualizarCarrito = () => {
     div.innerHTML = `
     <ul class="lista"><li>${prod.nombre}
     Precio: ${prod.precio}</li>
-    </ul>`
+    </ul><button id ="EliminarProducto">X</button>`
     
     contenedorCarrito.appendChild(div)
     });
     preciototal.innerText = carrito.reduce((acc, prod)=> acc + prod.precio, 0);
+    
+    const ElimianrProd = document.getElementById("EliminarProducto");
+    ElimianrProd.addEventListener("click", () =>{
+    carrito.length = 0;
+    actualizarCarrito()
+    actualizarLocal()
+    });
 }
 
 const actualizarLocal = () =>{
     localStorage.setItem("carrito", JSON.stringify(carrito))
 }
-
