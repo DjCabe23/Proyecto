@@ -55,19 +55,28 @@ finCompra.addEventListener("click", () => {
 let carrito = []
 
 //Productos
+const contenedor = document.getElementById("ropaDeportiva");
 const tipoDeProductos = document.getElementById("producto")
+const btn = document.querySelector(`#btn`)
+const url = `data.json`;
+btn.addEventListener(`click`, reqData)
 
-fetch("/data.json")
+function reqData() {
+fetch(url)
 .then ((res)=>res.json())
-.then ((data)=>{
+.then ((data)=>adder(data))
+.catch((error)=>{
+    console.error(error)
+})}
+function adder(data) {
     data.forEach((producto)=>{
-        const li = document.createElement("li")
-        li.innerHTML=`<img src=${producto.img}>
+        const div = document.createElement(`div`)
+        div.innerHTML=`<img src=${producto.img}>
         <h4>${producto.nombre}</h4>
         <p>$${producto.precio}</p>
         <button id ="agregar${producto.id}" class="boton-agregar">AGREGAR</button>`
         
-        lista.append(li)
+        contenedor.appendChild(div)
 
         const boton = document.getElementById(`agregar${producto.id}`);
         boton.addEventListener(`click`, () => {
@@ -80,33 +89,8 @@ fetch("/data.json")
                 }
               }).showToast();
     })
-})  })
-
-//Seleccion de ropa
-const contenedor = document.getElementById("ropaDeportiva");
-
-/*tipoDeProductos.forEach((producto) =>{
-    const div = document.createElement(`div`);
-    div.classList.add(`producto`);
-    div.innerHTML = `
-    <img src=${producto.img}>
-    <h4>${producto.nombre}</h4>
-    <p>$${producto.precio}</p>
-    <button id ="agregar${producto.id}" class="boton-agregar">AGREGAR</button>`
-    contenedor.appendChild(div)
-
-    const boton = document.getElementById(`agregar${producto.id}`);
-    boton.addEventListener(`click`, () => {
-        agegarCarrito(producto.id)
-        Toastify({
-            text: "Se agrego el producto seleccionado",
-            className: "info",
-            style: {
-              background: "linear-gradient(to right, #00b09b, #96c93d)",
-            }
-          }).showToast();
-    })
-})*/
+})    
+}    
 
 //Agregar 
 
