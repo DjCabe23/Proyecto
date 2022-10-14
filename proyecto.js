@@ -55,16 +55,37 @@ finCompra.addEventListener("click", () => {
 let carrito = []
 
 //Productos
-let tipoDeProductos = [
-    {id: 1, nombre: "Zapatilla", precio :2500, img : `./zapatilla.jpg`},
-    {id: 2, nombre: "Remera", precio :3000, img : `./remera.jpg`},
-    {id: 3, nombre: "Pantalon", precio :4500, img : `./pantalom.jpg`},
-    ]
+const tipoDeProductos = document.getElementById("producto")
+
+fetch("/data.json")
+.then ((res)=>res.json())
+.then ((data)=>{
+    data.forEach((producto)=>{
+        const li = document.createElement("li")
+        li.innerHTML=`<img src=${producto.img}>
+        <h4>${producto.nombre}</h4>
+        <p>$${producto.precio}</p>
+        <button id ="agregar${producto.id}" class="boton-agregar">AGREGAR</button>`
+        
+        lista.append(li)
+
+        const boton = document.getElementById(`agregar${producto.id}`);
+        boton.addEventListener(`click`, () => {
+            agegarCarrito(producto.id)
+            Toastify({
+                text: "Se agrego el producto seleccionado",
+                className: "info",
+                style: {
+                  background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+              }).showToast();
+    })
+})  })
 
 //Seleccion de ropa
 const contenedor = document.getElementById("ropaDeportiva");
 
-tipoDeProductos.forEach((producto) =>{
+/*tipoDeProductos.forEach((producto) =>{
     const div = document.createElement(`div`);
     div.classList.add(`producto`);
     div.innerHTML = `
@@ -85,7 +106,7 @@ tipoDeProductos.forEach((producto) =>{
             }
           }).showToast();
     })
-})
+})*/
 
 //Agregar 
 
@@ -125,13 +146,9 @@ const actualizarCarrito = () => {
     });
     preciototal.innerText = carrito.reduce((acc, prod)=> acc + prod.precio, 0);
     
-    const ElimianrProd = document.getElementById("EliminarProducto");
-    ElimianrProd.addEventListener("click", () =>{
-    carrito.length = 0;
-    actualizarCarrito()
-    actualizarLocal()
-    });
-}
+
+    };
+
 
 const actualizarLocal = () =>{
     localStorage.setItem("carrito", JSON.stringify(carrito))
