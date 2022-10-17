@@ -22,45 +22,16 @@ class cliente {
     }
 }
 
-//Carrito
-
-const botonvaciar = document.getElementById("vaciarcarro");
-botonvaciar.addEventListener("click", () =>{
-    carrito.length = 0;
-    actualizarCarrito()
-    actualizarLocal()
-    });
-
-const finCompra = document.getElementById("finCompra")
-finCompra.addEventListener("click", () => {
-    carrito.length=0
-    actualizarCarrito()
-    actualizarLocal()
-    Swal.fire({
-        title: "Perfecto",
-        text: "la compra ha sido perfecta, te enviaremos un correo con la informacion",
-        icon: "success",
-        buttons: true,
-        dangerMode: true,
-    })
-    .then((isOkay) => {
-        if (isOkay) {
-            form.submit();
-            window.location.reload();
-        }
-    });
-    return false;
-})
-
+//Productos
 let carrito = []
 
-//Productos
+
 const contenedor = document.getElementById("ropaDeportiva");
 const tipoDeProductos = document.getElementById("producto")
-const btn = document.querySelector(`#btn`)
+const btn = document.getElementById(`btn`)
 const url = `data.json`;
 btn.addEventListener(`click`, reqData)
-
+dataproducto=[];
 function reqData() {
 fetch(url)
 .then ((res)=>res.json())
@@ -79,6 +50,7 @@ function adder(data) {
         contenedor.appendChild(div)
 
         const boton = document.getElementById(`agregar${producto.id}`);
+        dataproducto.push(producto);
         boton.addEventListener(`click`, () => {
             agegarCarrito(producto.id)
             Toastify({
@@ -95,7 +67,7 @@ function adder(data) {
 //Agregar 
 
 function agegarCarrito(prodId) {
-    const item = tipoDeProductos.find ((prod) => prod.id === prodId)
+    const item = dataproducto.find ((prod) => prod.id === prodId)
     carrito.push(item)
     actualizarCarrito()
     actualizarLocal()
@@ -104,7 +76,7 @@ function agegarCarrito(prodId) {
 //Eliminar
 
 const eliminarDelCarrito = (prodId) => {
-    const item = carrito.find((prod)=> prod.id === prodId)
+    const item = dataproducto.find ((prod)=> prod.id === prodId)
     const indice = carrito.indexOf(item)
     carrito.splice(indice, 1)
     actualizarCarrito()
@@ -137,3 +109,35 @@ const actualizarCarrito = () => {
 const actualizarLocal = () =>{
     localStorage.setItem("carrito", JSON.stringify(carrito))
 }
+
+//Carrito
+
+const botonvaciar = document.getElementById("vaciarcarro");
+botonvaciar.addEventListener("click", () =>{
+    carrito.length = 0;
+    actualizarCarrito()
+    actualizarLocal()
+    });
+
+const finCompra = document.getElementById("finCompra")
+finCompra.addEventListener("click", () => {
+    carrito.length=0
+    actualizarCarrito()
+    actualizarLocal()
+    Swal.fire({
+        title: "Perfecto",
+        text: "la compra ha sido perfecta, te enviaremos un correo con la informacion",
+        icon: "success",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((isOkay) => {
+        if (isOkay) {
+            form.submit();
+            window.location.reload();
+        }
+    });
+    return false;
+})
+
+

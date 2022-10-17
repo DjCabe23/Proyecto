@@ -17,8 +17,6 @@
   <div>
     <a href="cuenta.html" class="button2">REGISTRATE</a>
   </div>
-  <ul class="botonera">
-    <li><a href="#">Inicio</a></li>
   <div class="inicio-carro">
     <div class="modal-carrito">
         <h3>Carrito</h3>
@@ -26,15 +24,16 @@
 
         </div>
         <p class="precioProducto">Precio Total $<span id="precioTotal">0</span></p>
-        <button id="vaciarcarro" class="botonAgregar">Vacias Carrito</button>
+        <button id="vaciarcarro" class="botonAgregar">Vaciar Carrito</button>
         <button id="finCompra">Finalizar compra</button>
     </div>    
   </div>
   <div id="producto"></div>
-  <button id="btn">hola</button>
+  <input type="button" value="Precione aqui para ver los producto", id="btn", onclick="this.disabled = true" >
   <!--Toastify-->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <main id="ropaDeportiva"></main>
+
   <!--Proyecto-->
 
   <script src="proyecto.js"></script>
